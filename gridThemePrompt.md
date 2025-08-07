@@ -20,7 +20,8 @@ Enhance the JSON to reflect the visual layout of the form using a 60-column grid
 3. **Assign Layout Fields:**
     
     - For each question (except group-type questions), add `"columnSpan": <integer>` at the root of the question object.
-    - For group type questions, page type questions and map type questions, always add `"columnCount": 60` at the root as these always occupy all 60 columns.
+    - For group type questions and page type questions, always add `"columnCount": 60` at the root as these always occupy all 60 columns.
+    - For esriQuestionTypeGeoPoint, esriQuestionTypePolyline, and esriQuestionTypePolygon type questions, always add `"columnCount": 30` at the root.
       
 4. **Preserve Layout:**  
     Maintain the original proportions and overall visual structure of the survey as closely as possible.
@@ -56,9 +57,9 @@ json
 
 4.1. Add `"columnCount": 60"` at the root of each page or group question.
 
-### Rule 5: If map question exists
+### Rule 5: If esriQuestionTypeGeoPoint, esriQuestionTypePolyline, or esriQuestionTypePolygon type questions exists
 
-5.1. Add `"columnCount": 60"` at the root of each map question if not already present.
+5.1. Add `"columnCount": 30"` at the root of these questions if not already present.
 
 ---
 
