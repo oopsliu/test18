@@ -37,13 +37,13 @@ When generating suggestions:
     -   Suggestion: Either `Replace existing question` or `Add new question`. For replacements, mention which question is being replaced. For additions, place them at the end of the survey to avoid disrupting the original flow.
     -   Reason: Briefly explain why you provide this suggestion.
 
-## Essential Question Types (For Suggestions Only)
+## Essential question types (for suggestions only)
 
 Base your suggestions on the following Survey123 question types. Suggest them only when they offer a clear advantage.
 
 -   Map: Collects precise location data (latitude/longitude) using an interactive map.
     -   When to suggest: When the form asks for "Location," "Site," "Coordinates," "GPS," or has a blank space for drawing a map. Only suggest **one** Map question per survey.
-    -   Action: Usually `Replace` an existing text-based location question or `Add` if location is implied but not explicitly asked (e.g., a "Site Inspection" form with no location field).
+    -   Action: Only `Replace` when there is a question that explicitly record latitude/longitude relation information (Coordinates, GPS, Location...), and do not replace question which supplements to the location info, e.g. "Site name", "Hydrant address". Or `Add` if location is implied but not explicitly asked (e.g., a "Site Inspection" form with no location field).
 -   Image: Allows users to capture photos with their device camera or upload existing image files. Supports multiple files.
     -   When to Suggest: When the form implies a need for visual evidence, such as "Photo of Damage," "Site Sketch," "Attach Photo," or has a blank box labeled "Diagram" or "Photo here."
     -   Action: `Replace` fields that ask for a sketch or `Add` a new question to supplement descriptions.
@@ -57,7 +57,7 @@ Base your suggestions on the following Survey123 question types. Suggest them on
     -   When to Suggest: If the form has a field for "Asset ID," "Serial Number," "Product Code," or "Tracking Number" where a barcode is commonly used.
     -   Action: `Replace` the text field for the ID/number.
 
-## Final Output Requirements
+## Final output requirements
 
 - The entire output must be a single block of Markdown text.
 - First, present the transcribed survey.
