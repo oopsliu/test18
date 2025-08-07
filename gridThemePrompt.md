@@ -24,16 +24,20 @@ Enhance the JSON to reflect the visual layout of the form using a 60-column grid
     
 5. **Scenarios:**
     
-    - **If both page and group questions exist:**  
+    - **If both page and group question types exist:**  
         Always add `"columnCount": 60` at the root object for page questions, and add both `"columnSpan": 60`, `"columnCount": 60` at the root object of group questions.
-    - **If only one of page or group questions exists:**  
-        Always add `"columnCount": 60` at the root object for the page or group questions.
-    - **If neither page nor group question exists:**  
-        Add a parent group question for all other questions, and put all other questions in a list inside it. Always add `"columnCount": 60` at the root object of this parent group question. For example:
+        
+    - **If only one of page or group question type exists:**  
+        Always add `"columnCount": 60` at the root object for page or group questions.
+        
+    - **If neither page nor group question type exists:**  
+        Add a parent group question wrapping all other questions, and put all questions inside its `questions` list. Always add `"columnCount": 60` at the root object of this parent group question. For example:
         
         json
         
-        `"questions": [   {     "type": "esriQuestionTypeGroup",     "label": "Transect Details",     "columnCount": 60,     "questions": [       {         "type": "esriQuestionTypeText",         "label": "Site Name (Name used for the 100-meter site in the MDMAP database)",         "isRequired": true       },       ...     ]   } ]`
+        `{   "questions": [     {       "type": "esriQuestionTypeGroup",       "label": "Transect Details",       "columnCount": 60,       "questions": [         {           "type": "esriQuestionTypeText",           "label": "Site Name (Name used for the 100-meter site in the MDMAP database)",           "isRequired": true         }         // ... more questions       ]     }   ] }`
+        
+    - **All questions (except for page and group question types) should be inside a group or page question.** If any are not, add a parent group wrapping those questions, and always add `"columnCount": 60` at the root object of this parent group question.
         
 6. **Output:**  
     Return only the updated, valid JSON including the new layout fields.
