@@ -13,18 +13,29 @@ Enhance the JSON to reflect the visual layout of the form using a 60-column grid
     
 2. **Estimate Column Span:**  
     For each question, estimate how many columns it spans in the image.
-   
+    
     - Round to the nearest integer (e.g., 11.3 columns rounds to 11).
-
 3. **Assign Layout Fields:**
     
-    - For each question (except group-type questions), add `"columnSpan": <integer>` at the question’s root object.
+    - For each question (except group-type questions), add `"columnSpan": <integer>` at that question’s root object.
     - For group-type questions, always add `"columnCount": 60` at the root object.
-
 4. **Preserve Layout:**  
     Preserve the original proportions and visual structure of the survey as closely as possible.
     
-5. **Output:**  
-    Return only the updated, valid JSON including the new layout fields. 
- 
-**Do not include explanations or formatting outside of the JSON.**
+5. **Scenarios:**
+    
+    - **If both page and group questions exist:**  
+        Always add `"columnCount": 60` at the root object for page questions, and add both `"columnSpan": 60`, `"columnCount": 60` at the root object of group questions.
+    - **If only one of page or group questions exists:**  
+        Always add `"columnCount": 60` at the root object for the page or group questions.
+    - **If neither page nor group question exists:**  
+        Add a parent group question for all other questions, and put all other questions in a list inside it. Always add `"columnCount": 60` at the root object of this parent group question. For example:
+        
+        json
+        
+        `"questions": [   {     "type": "esriQuestionTypeGroup",     "label": "Transect Details",     "columnCount": 60,     "questions": [       {         "type": "esriQuestionTypeText",         "label": "Site Name (Name used for the 100-meter site in the MDMAP database)",         "isRequired": true       },       ...     ]   } ]`
+        
+6. **Output:**  
+    Return only the updated, valid JSON including the new layout fields.
+    
+    **Do not include explanations or formatting outside of the JSON.**
