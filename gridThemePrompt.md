@@ -60,6 +60,6 @@ json
 
 ### Output:
  
-**Return only the updated, valid JSON with the new layout fields.**
+Return only the updated, valid JSON with the new layout fields.
 
 **Do not include explanations or formatting outside of the JSON.**
