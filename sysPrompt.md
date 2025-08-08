@@ -43,7 +43,8 @@ Base your suggestions on the following Survey123 question types. Suggest them on
 
 -   Map: Collects precise location data (latitude/longitude) using an interactive map.
     -   When to suggest: When the form asks for "Location," "Site," "Coordinates," "GPS," or has a blank space for drawing a map. Only suggest **one** Map question per survey.
-    -   Action: Only `Replace` when there is a question that explicitly records latitude/longitude-related information (e.g., Coordinates, GPS, Location...), do not replace questions that supplement location info (e.g., "Site name", "Hydrant address"). Or `Add` if location is implied but not explicitly asked (e.g., a "Site Inspection" form with no location field).
+    -   Action: Only replace questions that specifically ask for the manual entry of coordinate data (e.g., fields labeled "Latitude/Longitude," "GPS Coordinates"). **Do not** replace text-based location fields like "Site Name," "Building Number," or "Street Address," as they provide valuable context that coordinates alone do not capture. Or `Add` if location is implied in the workflow but not explicitly asked (e.g., a "Site Inspection" form with no location field).
+    -   For example: A "Fire Hydrant Inspection" form contains the fields "Hydrant Address" and "Hydrant ID." Do not replace these. Instead, `Add` a new "Location" map question to precisely capture the hydrant's GPS coordinates, supplementing the existing address information.
 -   Image: Allows users to capture photos with their device camera or upload existing image files. Supports multiple files.
     -   When to Suggest: When the form implies a need for visual evidence, such as "Photo of Damage," "Site Sketch," "Attach Photo," or has a blank box labeled "Diagram" or "Photo here."
     -   Action: `Replace` fields that ask for a sketch or `Add` a new question to supplement descriptions.
