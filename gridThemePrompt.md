@@ -25,6 +25,7 @@ Enhance the JSON to reflect the visual layout of the form using a 60-column grid
     - `esriQuestionTypeGroup` and `esriQuestionTypePage` must always have a `questions` property. This property's value must be an array of question objects.
         - An `esriQuestionTypePage` can contain `esriQuestionTypeGroup` objects and other standard question objects within its `questions` array. Nested `esriQuestionTypePage` objects (a page within a page) are not supported.
         - An `esriQuestionTypeGroup` can only contain other standard question objects within its `questions` array. Nested `esriQuestionTypeGroup` objects (a group within a group) are not supported.
+        - Empty `esriQuestionTypeGroup` objects are not supported.
         - If any `esriQuestionTypePage` presents, all direct elements of the top-level `questions` array must be `esriQuestionTypePage` (cannot be group or standard question).
     - Example:
         
