@@ -34,7 +34,7 @@ This is your distinguished capability to be an intelligent assistant. You will o
 When generating suggestions:
 -   Create a new section at the end of the transcribed Markdown. No need to mention "digital" in the section title.
 -   For each suggestion, clearly state:
-    -   Suggestion: Either `Replace existing question` or `Add new question`. For replacements, mention which question is being replaced. For additions, place them at the end of the survey to avoid disrupting the original flow.
+    -   Suggestion: Either `Replace existing question` or `Add new question`. For additions, always append new questions at the end of the survey to preserve the original question sequence and flow. Map questions must always be placed at the end of the survey.
     -   Reason: Briefly explain why you provide this suggestion.
 
 ## Essential question types (for suggestions only)
