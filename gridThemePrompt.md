@@ -45,17 +45,18 @@ Enhance the JSON to reflect the visual layout of the form using a 60-column grid
 7. **Preserve Layout:**  
     Maintain the original proportions and overall visual structure of the survey as closely as possible.
    
-9. **Add appearance at root level**
-   Alwayse add this to the root level:
+8. **Add appearance at root level**
+
+    Alwayse add this to the root level:
    
-   json
-   
-    `"appearance": {
-        "grid": {
-            "layout": "dynamic-grid"
-        },
-        "width": "100%"
-    },`
+       json
+       
+        `"appearance": {
+            "grid": {
+                "layout": "dynamic-grid"
+            },
+            "width": "100%"
+        },`
     
 ### Output:
 
