@@ -18,14 +18,13 @@ Enhance the JSON to reflect the visual layout of the form using a 60-column grid
     - Round the span to the nearest whole number (e.g., 11.3 columns rounds to 11).
 
 3. **Examine root level questions**  
-    Examine the structure of the JSON, and ensure that only `esriQuestionTypePage` or `esriQuestionTypeGroup` questions can exist inside the root "questions" array.
+    Examine the structure of the JSON, and ensure that only `esriQuestionTypePage` or `esriQuestionTypeGroup` questions can exist in the root `questions` array.
     
     - All other question types (except for page and group types) must be nested inside a group or page question. If any are not, wrap them in a parent group.
 
 4. **Exam group and page questions**
 
     - `esriQuestionTypeGroup` and `esriQuestionTypePage` must always have a `questions` property. This property's value must be an array of question objects.
-        
     - An `esriQuestionTypePage` can contain `esriQuestionTypeGroup` objects and other standard question objects within its `questions` array. Nested `esriQuestionTypePage` objects (a page within a page) are not supported.
     - An `esriQuestionTypeGroup` can only contain other standard question objects within its `questions` array. Nested `esriQuestionTypeGroup` objects (a group within a group) are not supported.
     - Don't create empty `esriQuestionTypeGroup`or `esriQuestionTypePage` objects. At least one question should be included in a group or page.
