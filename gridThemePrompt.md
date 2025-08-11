@@ -23,20 +23,14 @@ Enhance the JSON to reflect the visual layout of the form using a 60-column grid
 4. **Handle page and group questions**
 
     - **Page elimination**: Convert all `esriQuestionTypePage` objects to `esriQuestionTypeGroup` objects. Change their `type` property from `esriQuestionTypePage` to `esriQuestionTypeGroup`.
-        
-    - **⚠️ Critical Requirements:**
-        
-        - **No empty groups**: Empty `esriQuestionTypeGroup` objects are strictly forbidden. Every group must contain at least one question.
-        - **All questions must be grouped**: All question types (except `esriQuestionTypeGroup`) must be placed inside a group. No standalone questions are allowed at the root level.
-        - **No nested groups**: Nested `esriQuestionTypeGroup` objects (a group within a group) are strictly prohibited.
     - **Group structure**: `esriQuestionTypeGroup` must always have a `questions` property with an array of question objects as its value.
         
-    - **Handling nested groups**: If nested groups are detected, automatically move the nested child group up to its parent's level to eliminate nesting violations. Distribute the child group's questions among sibling groups or create new groups as needed to maintain logical organization.
-        
-    - **Validation checklist**:  
-        ✓ Every group contains at least one question  
-        ✓ All non-group questions are inside a group  
-        ✓ No group contains another group as a child
+    - **⚠️ Critical Requirements:**
+      
+        - **No nested groups**: Nested `esriQuestionTypeGroup` objects (a group within a group) are strictly prohibited. If nested groups are detected, automatically move the nested child group up to its parent's level to eliminate nesting violations. Distribute the child group's questions among sibling groups or create new groups as needed to maintain logical organization.
+        - **No empty groups**: Empty `esriQuestionTypeGroup` objects are strictly forbidden. Every group must contain at least one question.
+        - **All questions must be grouped**: All question types (except `esriQuestionTypeGroup`) must be placed inside a group. No standalone questions are allowed at the root level.
+
 5. **Example:**
     
     json
@@ -58,7 +52,12 @@ Enhance the JSON to reflect the visual layout of the form using a 60-column grid
     json
     
     `"appearance": { "grid": { "layout": "dynamic-grid" }, "width": "100%" },`
+
+9. **Validation checklist**:
     
+   ✓ Every group contains at least one question  
+   ✓ All non-group questions are inside a group  
+   ✓ No group contains another group as a child
 
 ### Output:
 
