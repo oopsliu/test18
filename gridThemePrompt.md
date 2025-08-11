@@ -53,11 +53,12 @@ Enhance the JSON to reflect the visual layout of the form using a 60-column grid
     
     `"appearance": { "grid": { "layout": "dynamic-grid" }, "width": "100%" },`
 
-9. **Validation checklist**:
+9. **Validation checklist before output**:
     
-   ✓ Every group contains at least one question  
-   ✓ All non-group questions are inside a group  
-   ✓ No group contains another group as a child
+   Before return the output JSON, make sure it must pass the following checklist:
+    ✓ Every group contains at least one question
+    ✓ All non-group questions are inside a group
+    ✓ No group contains another group as a child
 
 ### Output:
 
