@@ -16,51 +16,42 @@ Enhance the JSON to reflect the visual layout of the form using a 60-column grid
     For each question, estimate how many columns it spans visually in the image.
     
     - Round the span to the nearest whole number (e.g., 11.3 columns rounds to 11).
-
 3. **Examine root level questions**  
-    Examine the structure of the JSON, and ensure that only `esriQuestionTypePage` or `esriQuestionTypeGroup` questions can exist in the root `questions` array.
+    Examine the structure of the JSON, and ensure that only `esriQuestionTypeGroup` questions can exist in the root `questions` array.
     
-    - All other question types (except for page and group types) must be inside a group or page question. If any are not, wrap them in a parent group.
-
-4. **Exam group and page questions**
-
-    - `esriQuestionTypeGroup` and `esriQuestionTypePage` must always have a `questions` property. This property's value must be an array of question objects.
-    - An `esriQuestionTypePage` can contain `esriQuestionTypeGroup` objects and other standard question objects within its `questions` array. Nested `esriQuestionTypePage` objects (a page within a page) are not supported. If nested pages (a page within a page) is encountered, automatically move the nested child page up to its parent's level to eliminate nesting violations.
-    - An `esriQuestionTypeGroup` can only contain other standard question objects within its `questions` array. Nested `esriQuestionTypeGroup` objects (a group within a group) are not supported. If nested groups (a group within a group) is encountered, automatically move the nested child group up to its parent's level to eliminate nesting violations.
-    - Don't create empty `esriQuestionTypeGroup`or `esriQuestionTypePage` objects. At least one question should be included in a group or page.
-    - If any `esriQuestionTypePage` presents, all direct elements of the top-level `questions` array must be `esriQuestionTypePage` (cannot be group or standard question).
+    - All other question types (except for group types) must be inside a group question. If any are not, wrap them in a parent group.
+4. **Handle page and group questions**
     
+    - **Page elimination:** Convert all `esriQuestionTypePage` objects to `esriQuestionTypeGroup` objects. Change their `type` property from `esriQuestionTypePage` to `esriQuestionTypeGroup`.
+    - `esriQuestionTypeGroup` must always have a `questions` property. This property's value must be an array of question objects.
+    - An `esriQuestionTypeGroup` can contain other standard question objects within its `questions` array. Nested `esriQuestionTypeGroup` objects (a group within a group) are not supported.
+    - **If nested groups are detected:** If a group within a group is encountered, automatically move the nested child group up to its parent's level to eliminate nesting violations. Distribute the child group's questions among sibling groups or create new groups as needed to maintain logical organization.
+    - Don't create empty `esriQuestionTypeGroup` objects. At least one question should be included in a group.
 5. **Example:**
-        
-        json
-        
-        `{ "questions": [ { "type": "esriQuestionTypeGroup", "label": "Transect Details", "questions": [ { "type": "esriQuestionTypeText", "label": "Site Name (Name used for the 100-meter site in the MDMAP database)", "isRequired": true } // ... more questions ] } ] }`
-        
+    
+    json
+    
+    `{ "questions": [ { "type": "esriQuestionTypeGroup", "label": "Transect Details", "questions": [ { "type": "esriQuestionTypeText", "label": "Site Name (Name used for the 100-meter site in the MDMAP database)", "isRequired": true } // ... more questions ] } ] }`
+    
 6. **Assign Layout Columns:**
     
-    - For each question (except `esriQuestionTypeGroup` and `esriQuestionTypePage` questions), add `"columnSpan": <integer>` at the root of the question object.
-    - For `esriQuestionTypeGroup` and `esriQuestionTypePage` questions, always add `"columnCount": 60"` at the root, as these always occupy all 60 columns. If `esriQuestionTypeGroup` is inside a `esriQuestionTypePage` question, also add `"columnSpan": 60"` at it's root.
+    - For each question (except `esriQuestionTypeGroup` questions), add `"columnSpan": <integer>` at the root of the question object.
+    - For `esriQuestionTypeGroup` questions, always add `"columnCount": 60"` at the root, as these always occupy all 60 columns.
     - For esriQuestionTypeGeoPoint, esriQuestionTypePolyline, and esriQuestionTypePolygon question types, always add `"columnSpan": 30"` at the root of the question object.
-
 7. **Preserve Layout:**  
     Maintain the original proportions and overall visual structure of the survey as closely as possible.
-   
-8. **Add appearance at root level**
-
-    Alwayse add this to the root level:
-   
-       json
-       
-        `"appearance": {
-            "grid": {
-                "layout": "dynamic-grid"
-            },
-            "width": "100%"
-        },`
     
+8. **Add appearance at root level**
+    
+    Always add this to the root level:
+    
+    json
+    
+    `"appearance": { "grid": { "layout": "dynamic-grid" }, "width": "100%" },`
+    
+
 ### Output:
 
 Return only the updated, valid JSON with the new layout fields.
 
 **Do not include explanations or formatting outside of the JSON.**
-
